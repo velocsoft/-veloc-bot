@@ -471,7 +471,7 @@ Asagidaki butonlara tikla:"""
                 if text.startswith("/start"):
                     requests.get(f"{BASE}/sendMessage", params={
                         "chat_id": chat_id,
-                        "text": f"yo {name} 👋\nben Veloc, her turlu konuda yardimci olabilirim.\n\nsana ne lazimsa sor, bulurum veya cevaplarim 🔥",
+                        "text": f"Merhaba {name}! 👋\n\nBen Veloc, yapay zeka destekli kisisel asistaniyim.\n\n🌐 Internetten arama yapabilirim\n⏰ Hatirlatici kurabilirim\n💬 Her konuda sohbet edebilirim\n⚡ API erisimi saglayabilirim\n\nBana ne sormak istersen, yazman yeterli.",
                         "reply_markup": KEYBOARD
                     })
                     continue
