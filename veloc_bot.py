@@ -471,7 +471,7 @@ Asagidaki butonlara tikla:"""
                 if text.startswith("/start"):
                     requests.get(f"{BASE}/sendMessage", params={
                         "chat_id": chat_id,
-                        "text": f"selam {name} naber, naptin",
+                        "text": f"selam {name} naber, naptin\n\nNeler yapabilirim:\n🔍 Internetten arama\n⏰ Hatirlatici\n💬 Sohbet\n⚡ API satin al",
                         "reply_markup": KEYBOARD
                     })
                     continue
@@ -507,9 +507,38 @@ Content-Type: application/json
                 if text.startswith("/help"):
                     requests.get(f"{BASE}/sendMessage", params={
                         "chat_id": chat_id,
-                        "text": "selam bro ben Veloc. takilmak veya sohbet etmek istersen burdayim. bana '10 dakika sonra yemegi hatirlat' falan da diyebilirsin, beynim yanmazsa hatirlatirim 🗿",
+                        "text": "selam bro ben Veloc. neler yapabilirim:\n\n🔍 Internetten arama yapabilirim\n⏰ Hatirlatici kurabilirim\n💬 Sohbet edebilirim\n\nArama icin: /ara konu\nOrnek: /ara son fenerbahce maci",
                         "reply_markup": KEYBOARD
                     })
+                    continue
+
+                if text.startswith("/ara "):
+                    sorgu = text.replace("/ara ", "").strip()
+                    if not sorgu:
+                        requests.get(f"{BASE}/sendMessage", params={
+                            "chat_id": chat_id,
+                            "text": "ne aramami istiyorsun? /ara konu yaz",
+                            "reply_markup": KEYBOARD
+                        })
+                        continue
+                    requests.get(f"{BASE}/sendChatAction", params={
+                        "chat_id": chat_id,
+                        "action": "typing"
+                    })
+                    sonuc = arama_yap(sorgu)
+                    if sonuc:
+                        requests.get(f"{BASE}/sendMessage", params={
+                            "chat_id": chat_id,
+                            "text": f"🔍 *{sorgu}*\n\n{sonuc}",
+                            "parse_mode": "Markdown",
+                            "reply_markup": KEYBOARD
+                        })
+                    else:
+                        requests.get(f"{BASE}/sendMessage", params={
+                            "chat_id": chat_id,
+                            "text": "bi sey bulamadim kral 🤷",
+                            "reply_markup": KEYBOARD
+                        })
                     continue
 
                 if text == "/reminders":
