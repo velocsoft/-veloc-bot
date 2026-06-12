@@ -439,6 +439,23 @@ Asagidaki butonlara tikla:"""
                     })
                     continue
 
+                if text.startswith("/test_paid"):
+                    existing = api_key_kontrol(user_id)
+                    if not existing:
+                        key = api_key_olustur(user_id, username)
+                        msg = f"✅ *TEST ODEME ALINDI!*\n\nAPI Key'in hazir:\n`{key}`\n\nKullanim:\nHeader: `Authorization: Bearer {key}`"
+                    else:
+                        key = existing["key"]
+                        msg = f"✅ *ZATEN API KEYIN VAR*\n\n`{key}`"
+                    requests.get(f"{BASE}/sendMessage", params={
+                        "chat_id": chat_id,
+                        "text": msg,
+                        "parse_mode": "Markdown",
+                        "reply_markup": KEYBOARD
+                    })
+                    print(f"[TEST] {name} - Key: {key}")
+                    continue
+
                 if text.startswith("/help"):
                     requests.get(f"{BASE}/sendMessage", params={
                         "chat_id": chat_id,
