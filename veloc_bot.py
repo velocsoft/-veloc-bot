@@ -50,7 +50,7 @@ API_BUTONLAR = json.dumps({
     "inline_keyboard": [
         [
             {"text": "API Ozellikleri", "callback_data": "api_ozellikleri"},
-            {"text": "Odeme Yap", "callback_data": "odeme_yap"}
+            {"text": "Odeme Yap", "url": WHOP_LINK}
         ],
         [
             {"text": "API Key'imi Goster", "callback_data": "api_keyim"}
@@ -250,26 +250,6 @@ Body: {"message": "merhaba"}
                         "chat_id": cb_chat_id,
                         "message_id": cb_msg_id,
                         "text": ozellikler,
-                        "parse_mode": "Markdown",
-                        "reply_markup": API_BUTONLAR
-                    })
-
-                elif cb_data == "odeme_yap":
-                    odeme = f"""💰 *ODEME ISLEMI* 💰
-
-*Aylik: $10*
-Otomatik yenilenir, istedigin zaman iptal et.
-
-*Odeme icin tikla:*
-{WHOP_LINK}
-
-Odeme sonrasi bot sana otomatik API key verecek.
-
-*Sorun yasarsan:* @VelocSoft"""
-                    requests.get(f"{BASE}/editMessageText", params={
-                        "chat_id": cb_chat_id,
-                        "message_id": cb_msg_id,
-                        "text": odeme,
                         "parse_mode": "Markdown",
                         "reply_markup": API_BUTONLAR
                     })
