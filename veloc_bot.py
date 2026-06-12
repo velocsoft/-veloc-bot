@@ -471,7 +471,7 @@ Asagidaki butonlara tikla:"""
                 if text.startswith("/start"):
                     requests.get(f"{BASE}/sendMessage", params={
                         "chat_id": chat_id,
-                        "text": f"selam {name} naber, naptin\n\nNeler yapabilirim:\n🔍 Internetten arama\n⏰ Hatirlatici\n💬 Sohbet\n⚡ API satin al",
+                        "text": f"selam {name} naber, naptin",
                         "reply_markup": KEYBOARD
                     })
                     continue
