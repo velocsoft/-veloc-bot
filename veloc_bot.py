@@ -373,6 +373,7 @@ Odeme icin "Odeme Yap" butonuna bas 👇"""
                     elif cb_data == "api_keyim":
                         key_data = api_key_kontrol(cb_user_id)
                         if key_data:
+                            bot_url = "https://a35823-51ce.e.jrnm.app"
                             msg = f"""🔑 *API KEY'IN* 🔑
 
 `{key_data['key']}`
@@ -380,8 +381,38 @@ Odeme icin "Odeme Yap" butonuna bas 👇"""
 📅 Olusturma: {key_data['created']}
 ⏰ Bitis: {key_data['expires']}
 
-*Kullanim:*
-Header'a ekle: `Authorization: Bearer {key_data['key']}`"""
+*Entegrasyon Kodu (Python):*
+```python
+import requests
+
+API_URL = "{bot_url}/chat"
+API_KEY = "{key_data['key']}"
+
+r = requests.post(API_URL,
+    json={{"message": "merhaba"}},
+    headers={{"Authorization": f"Bearer {{API_KEY}}"}}
+)
+print(r.json()["reply"])
+```
+
+*Entegrasyon Kodu (JavaScript):*
+```javascript
+const r = await fetch("{bot_url}/chat", {{
+  method: "POST",
+  headers: {{
+    "Authorization": "Bearer {key_data['key']}",
+    "Content-Type": "application/json"
+  }},
+  body: JSON.stringify({{message: "merhaba"}})
+}});
+const data = await r.json();
+console.log(data.reply);
+```
+
+*Entegrasyon Kodu (cURL):*
+```
+curl -X POST {bot_url}/chat -H "Authorization: Bearer {key_data['key']}" -H "Content-Type: application/json" -d '{{"message": "merhaba"}}'
+```"""
                         else:
                             msg = """❌ *API KEYIN YOK*
 
@@ -473,10 +504,26 @@ Asagidaki butonlara tikla:"""
                     existing = api_key_kontrol(user_id)
                     if not existing:
                         key = api_key_olustur(user_id, username)
-                        msg = f"✅ *TEST ODEME ALINDI!*\n\nAPI Key'in hazir:\n`{key}`\n\nKullanim:\nHeader: `Authorization: Bearer {key}`"
                     else:
                         key = existing["key"]
-                        msg = f"✅ *ZATEN API KEYIN VAR*\n\n`{key}`"
+                    bot_url = "https://a35823-51ce.e.jrnm.app"
+                    msg = f"""✅ *API KEY HAZIR!*
+
+`{key}`
+
+*Entegrasyon Kodu (Python):*
+```python
+import requests
+
+API_URL = "{bot_url}/chat"
+API_KEY = "{key}"
+
+r = requests.post(API_URL,
+    json={{"message": "merhaba"}},
+    headers={{"Authorization": f"Bearer {{API_KEY}}"}}
+)
+print(r.json()["reply"])
+```"""
                     requests.get(f"{BASE}/sendMessage", params={
                         "chat_id": chat_id,
                         "text": msg,
