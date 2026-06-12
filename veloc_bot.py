@@ -471,7 +471,7 @@ Asagidaki butonlara tikla:"""
                 if text.startswith("/start"):
                     requests.get(f"{BASE}/sendMessage", params={
                         "chat_id": chat_id,
-                        "text": f"Aleykum selam {name} 🙏\n\nBen Veloc, senin kisisel AI asistaniyim.\n\n🌐 Arama yapabilirim\n⏰ Hatirlatici kurabilirim\n💬 Sohbet edebilirim\n⚡ API satin alabilirim\n\nNasil yardimci olabilirim?",
+                        "text": f"Aleykum selam kanka {name} 🙏",
                         "reply_markup": KEYBOARD
                     })
                     continue
