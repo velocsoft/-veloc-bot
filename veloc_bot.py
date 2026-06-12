@@ -189,6 +189,36 @@ def whop_webhook():
 def health():
     return jsonify({"status": "ok", "bot": "Veloc"})
 
+@app.route("/chat", methods=["POST"])
+def chat():
+    auth = request.headers.get("Authorization", "")
+    if not auth.startswith("Bearer "):
+        return jsonify({"error": "Token gerekli"}), 401
+
+    token = auth.replace("Bearer ", "")
+    keys = api_keys_yukle()
+    found_user = None
+    for uid, kdata in keys.items():
+        if kdata["key"] == token:
+            found_user = uid
+            break
+
+    if not found_user:
+        return jsonify({"error": "Gecersiz API key"}), 401
+
+    data = request.json
+    if not data or "message" not in data:
+        return jsonify({"error": "message gerekli"}), 400
+
+    mesaj = data["message"]
+    reply = cevap_ver(mesaj, int(found_user))
+
+    return jsonify({
+        "reply": reply,
+        "model": "veloc-ai",
+        "status": "ok"
+    })
+
 
 # ==================== TELEGRAM BOT ====================
 
