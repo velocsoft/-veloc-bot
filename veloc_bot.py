@@ -381,37 +381,13 @@ Odeme icin "Odeme Yap" butonuna bas 👇"""
 📅 Olusturma: {key_data['created']}
 ⏰ Bitis: {key_data['expires']}
 
-*Entegrasyon Kodu (Python):*
-```python
-import requests
-
-API_URL = "{bot_url}/chat"
-API_KEY = "{key_data['key']}"
-
-r = requests.post(API_URL,
-    json={{"message": "merhaba"}},
-    headers={{"Authorization": f"Bearer {{API_KEY}}"}}
-)
-print(r.json()["reply"])
+*Entegrasyon:*
 ```
+POST {bot_url}/chat
+Authorization: Bearer {key_data['key']}
+Content-Type: application/json
 
-*Entegrasyon Kodu (JavaScript):*
-```javascript
-const r = await fetch("{bot_url}/chat", {{
-  method: "POST",
-  headers: {{
-    "Authorization": "Bearer {key_data['key']}",
-    "Content-Type": "application/json"
-  }},
-  body: JSON.stringify({{message: "merhaba"}})
-}});
-const data = await r.json();
-console.log(data.reply);
-```
-
-*Entegrasyon Kodu (cURL):*
-```
-curl -X POST {bot_url}/chat -H "Authorization: Bearer {key_data['key']}" -H "Content-Type: application/json" -d '{{"message": "merhaba"}}'
+{{"message": "merhaba"}}
 ```"""
                         else:
                             msg = """❌ *API KEYIN YOK*
@@ -511,18 +487,13 @@ Asagidaki butonlara tikla:"""
 
 `{key}`
 
-*Entegrasyon Kodu (Python):*
-```python
-import requests
+*Entegrasyon:*
+```
+POST {bot_url}/chat
+Authorization: Bearer {key}
+Content-Type: application/json
 
-API_URL = "{bot_url}/chat"
-API_KEY = "{key}"
-
-r = requests.post(API_URL,
-    json={{"message": "merhaba"}},
-    headers={{"Authorization": f"Bearer {{API_KEY}}"}}
-)
-print(r.json()["reply"])
+{{"message": "merhaba"}}
 ```"""
                     requests.get(f"{BASE}/sendMessage", params={
                         "chat_id": chat_id,
