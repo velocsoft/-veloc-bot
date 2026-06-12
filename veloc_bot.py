@@ -153,7 +153,7 @@ def whop_webhook():
         if not order_id:
             return jsonify({"ok": False, "error": "no order_id"}), 400
 
-        if event == "invoice_paid" or event == "membership_activated":
+        if event in ("invoice_paid", "membership_activated", "payment_succeeded"):
             order_data = siparis_onayla(order_id)
             if order_data:
                 user_id = order_data["user_id"]
