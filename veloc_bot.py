@@ -158,22 +158,26 @@ def whop_webhook():
             if order_data:
                 user_id = order_data["user_id"]
                 username = order_data["username"]
-
-                key = api_key_olustur(user_id, username)
-
-                telegram_mesaj_gonder(user_id,
-                    f"✅ *ODEME ALINDI!* ✅\n\n"
-                    f"API Key'in hazir:\n`{key}`\n\n"
-                    f"Kullanim:\n"
-                    f"Header: `Authorization: Bearer {key}`\n\n"
-                    f"Iyi kullanimlar kral 🔥"
-                )
-
-                print(f"[ODEME BASARILI] {username} - Key: {key}")
-                return jsonify({"ok": True, "key": key})
             else:
-                print(f"[ODEME HATA] Order bulunamadi: {order_id}")
-                return jsonify({"ok": False, "error": "order not found"}), 404
+                user_id = int(order_id)
+                username = "whop_user"
+
+            existing = api_key_kontrol(user_id)
+            if not existing:
+                key = api_key_olustur(user_id, username)
+            else:
+                key = existing["key"]
+
+            telegram_mesaj_gonder(user_id,
+                f"✅ *ODEME ALINDI!* ✅\n\n"
+                f"API Key'in hazir:\n`{key}`\n\n"
+                f"Kullanim:\n"
+                f"Header: `Authorization: Bearer {key}`\n\n"
+                f"Iyi kullanimlar kral 🔥"
+            )
+
+            print(f"[ODEME BASARILI] {username} - Key: {key}")
+            return jsonify({"ok": True, "key": key})
 
         return jsonify({"ok": True, "status": "ignored"})
 
