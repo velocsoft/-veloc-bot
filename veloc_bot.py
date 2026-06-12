@@ -230,7 +230,7 @@ while True:
                 if cb_data == "api_ozellikleri":
                     ozellikler = """⚡ *VELOC API v1* ⚡
 
-🔹 *Sinirsiz AI Sohbet* - GPT-4o destekli, sinir yok
+🔹 *Sinirsiz AI Sohbet* - Veloc'un kendi yapay zekasi
 🔹 *Turkce Destek* - Dogal Turkce konusma
 🔹 *Hizli Cevap* - Milisaniye icinde yanit
 🔹 *7/24 Erisim* - Durmuyor, uyumuyor
@@ -379,7 +379,7 @@ Yeni key icin once mevcut keyi iptal et."""
                 else:
                     msg = """⚡ *VELOC API* ⚡
 
-AI destekli sinirsiz sohbet API'si.
+Veloc AI destekli sinirsiz sohbet API'si.
 
 *Fiyat:* $10/ay
 *Sinir:* Yok, sinirsiz
