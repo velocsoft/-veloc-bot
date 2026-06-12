@@ -471,7 +471,7 @@ Asagidaki butonlara tikla:"""
                 if text.startswith("/start"):
                     requests.get(f"{BASE}/sendMessage", params={
                         "chat_id": chat_id,
-                        "text": f"selam {name} naber, naptin",
+                        "text": f"yo {name} 👋\nben Veloc, her turlu konuda yardimci olabilirim.\n\nsana ne lazimsa sor, bulurum veya cevaplarim 🔥",
                         "reply_markup": KEYBOARD
                     })
                     continue
