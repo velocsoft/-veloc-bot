@@ -471,7 +471,7 @@ Asagidaki butonlara tikla:"""
                 if text.startswith("/start"):
                     requests.get(f"{BASE}/sendMessage", params={
                         "chat_id": chat_id,
-                        "text": f"Aleykum selam kanka {name} 🙏",
+                        "text": f"Aleykum selam kanka {name} 🔥",
                         "reply_markup": KEYBOARD
                     })
                     continue
